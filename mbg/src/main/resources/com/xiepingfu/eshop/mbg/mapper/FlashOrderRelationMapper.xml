@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiepingfu.eshop.mbg.mapper.FlashOrderRelationMapper">
+  <resultMap id="BaseResultMap" type="com.xiepingfu.eshop.mbg.model.FlashOrderRelation">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="section_id" jdbcType="BIGINT" property="sectionId" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from flash_order_relation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiepingfu.eshop.mbg.model.FlashOrderRelation">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into flash_order_relation (section_id, order_id)
+    values (#{sectionId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xiepingfu.eshop.mbg.model.FlashOrderRelation">
+    update flash_order_relation
+    set section_id = #{sectionId,jdbcType=BIGINT},
+      order_id = #{orderId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, section_id, order_id
+    from flash_order_relation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, section_id, order_id
+    from flash_order_relation
+  </select>
+</mapper>

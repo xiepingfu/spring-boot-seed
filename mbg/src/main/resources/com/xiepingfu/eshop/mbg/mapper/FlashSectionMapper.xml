@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiepingfu.eshop.mbg.mapper.FlashSectionMapper">
+  <resultMap id="BaseResultMap" type="com.xiepingfu.eshop.mbg.model.FlashSection">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="chapter_id" jdbcType="BIGINT" property="chapterId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="is_enable" jdbcType="BIT" property="isEnable" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from flash_section
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiepingfu.eshop.mbg.model.FlashSection">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into flash_section (chapter_id, create_time, start_time, 
+      end_time, is_enable, title, 
+      subtitle)
+    values (#{chapterId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{isEnable,jdbcType=BIT}, #{title,jdbcType=VARCHAR}, 
+      #{subtitle,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xiepingfu.eshop.mbg.model.FlashSection">
+    update flash_section
+    set chapter_id = #{chapterId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      is_enable = #{isEnable,jdbcType=BIT},
+      title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, chapter_id, create_time, start_time, end_time, is_enable, title, subtitle
+    from flash_section
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, chapter_id, create_time, start_time, end_time, is_enable, title, subtitle
+    from flash_section
+  </select>
+</mapper>

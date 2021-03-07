@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiepingfu.eshop.mbg.mapper.OrderInformationMapper">
+  <resultMap id="BaseResultMap" type="com.xiepingfu.eshop.mbg.model.OrderInformation">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="pay_amount" jdbcType="DECIMAL" property="payAmount" />
+    <result column="freight_amount" jdbcType="DECIMAL" property="freightAmount" />
+    <result column="discounted_price" jdbcType="DECIMAL" property="discountedPrice" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="tracking_number" jdbcType="VARCHAR" property="trackingNumber" />
+    <result column="receiver_name" jdbcType="VARCHAR" property="receiverName" />
+    <result column="receiver_phone" jdbcType="VARCHAR" property="receiverPhone" />
+    <result column="receiver_post_code" jdbcType="VARCHAR" property="receiverPostCode" />
+    <result column="receiver_address" jdbcType="VARCHAR" property="receiverAddress" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
+    <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="is_flash" jdbcType="BIT" property="isFlash" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from order_information
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiepingfu.eshop.mbg.model.OrderInformation">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order_information (user_id, username, create_time, 
+      total_amount, pay_amount, freight_amount, 
+      discounted_price, status, tracking_number, 
+      receiver_name, receiver_phone, receiver_post_code, 
+      receiver_address, note, is_delete, 
+      pay_time, receive_time, comment_time, 
+      modify_time, is_flash)
+    values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{totalAmount,jdbcType=DECIMAL}, #{payAmount,jdbcType=DECIMAL}, #{freightAmount,jdbcType=DECIMAL}, 
+      #{discountedPrice,jdbcType=DECIMAL}, #{status,jdbcType=BIT}, #{trackingNumber,jdbcType=VARCHAR}, 
+      #{receiverName,jdbcType=VARCHAR}, #{receiverPhone,jdbcType=VARCHAR}, #{receiverPostCode,jdbcType=VARCHAR}, 
+      #{receiverAddress,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP}, #{commentTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{isFlash,jdbcType=BIT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xiepingfu.eshop.mbg.model.OrderInformation">
+    update order_information
+    set user_id = #{userId,jdbcType=BIGINT},
+      username = #{username,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      pay_amount = #{payAmount,jdbcType=DECIMAL},
+      freight_amount = #{freightAmount,jdbcType=DECIMAL},
+      discounted_price = #{discountedPrice,jdbcType=DECIMAL},
+      status = #{status,jdbcType=BIT},
+      tracking_number = #{trackingNumber,jdbcType=VARCHAR},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
+      receiver_post_code = #{receiverPostCode,jdbcType=VARCHAR},
+      receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=BIT},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      is_flash = #{isFlash,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, user_id, username, create_time, total_amount, pay_amount, freight_amount, 
+    discounted_price, status, tracking_number, receiver_name, receiver_phone, receiver_post_code, 
+    receiver_address, note, is_delete, pay_time, receive_time, comment_time, modify_time, 
+    is_flash
+    from order_information
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, user_id, username, create_time, total_amount, pay_amount, freight_amount, 
+    discounted_price, status, tracking_number, receiver_name, receiver_phone, receiver_post_code, 
+    receiver_address, note, is_delete, pay_time, receive_time, comment_time, modify_time, 
+    is_flash
+    from order_information
+  </select>
+</mapper>

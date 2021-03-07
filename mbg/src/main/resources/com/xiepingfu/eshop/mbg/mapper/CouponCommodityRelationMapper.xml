@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiepingfu.eshop.mbg.mapper.CouponCommodityRelationMapper">
+  <resultMap id="BaseResultMap" type="com.xiepingfu.eshop.mbg.model.CouponCommodityRelation">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="coupon_id" jdbcType="BIGINT" property="couponId" />
+    <result column="commodity_id" jdbcType="BIGINT" property="commodityId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from coupon_commodity_relation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiepingfu.eshop.mbg.model.CouponCommodityRelation">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into coupon_commodity_relation (coupon_id, commodity_id)
+    values (#{couponId,jdbcType=BIGINT}, #{commodityId,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xiepingfu.eshop.mbg.model.CouponCommodityRelation">
+    update coupon_commodity_relation
+    set coupon_id = #{couponId,jdbcType=BIGINT},
+      commodity_id = #{commodityId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, coupon_id, commodity_id
+    from coupon_commodity_relation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, coupon_id, commodity_id
+    from coupon_commodity_relation
+  </select>
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiepingfu.eshop.mbg.mapper.CommodityCommentMapper">
+  <resultMap id="BaseResultMap" type="com.xiepingfu.eshop.mbg.model.CommodityComment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="content" jdbcType="INTEGER" property="content" />
+    <result column="likes" jdbcType="INTEGER" property="likes" />
+    <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
+    <result column="dislikes" jdbcType="INTEGER" property="dislikes" />
+    <result column="commodity_id" jdbcType="BIGINT" property="commodityId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from commodity_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiepingfu.eshop.mbg.model.CommodityComment">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into commodity_comment (parent_id, user_id, username, 
+      content, likes, comment_count, 
+      dislikes, commodity_id)
+    values (#{parentId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, 
+      #{content,jdbcType=INTEGER}, #{likes,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER}, 
+      #{dislikes,jdbcType=INTEGER}, #{commodityId,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xiepingfu.eshop.mbg.model.CommodityComment">
+    update commodity_comment
+    set parent_id = #{parentId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      username = #{username,jdbcType=VARCHAR},
+      content = #{content,jdbcType=INTEGER},
+      likes = #{likes,jdbcType=INTEGER},
+      comment_count = #{commentCount,jdbcType=INTEGER},
+      dislikes = #{dislikes,jdbcType=INTEGER},
+      commodity_id = #{commodityId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, parent_id, user_id, username, content, likes, comment_count, dislikes, 
+    commodity_id
+    from commodity_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, parent_id, user_id, username, content, likes, comment_count, dislikes, 
+    commodity_id
+    from commodity_comment
+  </select>
+</mapper>

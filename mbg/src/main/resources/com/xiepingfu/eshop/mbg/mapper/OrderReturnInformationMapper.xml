@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiepingfu.eshop.mbg.mapper.OrderReturnInformationMapper">
+  <resultMap id="BaseResultMap" type="com.xiepingfu.eshop.mbg.model.OrderReturnInformation">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="return_amount" jdbcType="DECIMAL" property="returnAmount" />
+    <result column="return_name" jdbcType="VARCHAR" property="returnName" />
+    <result column="return_phone" jdbcType="VARCHAR" property="returnPhone" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="handle_time" jdbcType="TIMESTAMP" property="handleTime" />
+    <result column="handle_note" jdbcType="VARCHAR" property="handleNote" />
+    <result column="return_note" jdbcType="VARCHAR" property="returnNote" />
+    <result column="reason_id" jdbcType="BIGINT" property="reasonId" />
+    <result column="receive_name" jdbcType="VARCHAR" property="receiveName" />
+    <result column="receive_phone" jdbcType="VARCHAR" property="receivePhone" />
+    <result column="receive_address" jdbcType="VARCHAR" property="receiveAddress" />
+    <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
+    <result column="tracking_number" jdbcType="VARCHAR" property="trackingNumber" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from order_return_information
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xiepingfu.eshop.mbg.model.OrderReturnInformation">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order_return_information (order_id, sku_id, create_time, 
+      username, return_amount, return_name, 
+      return_phone, status, handle_time, 
+      handle_note, return_note, reason_id, 
+      receive_name, receive_phone, receive_address, 
+      receive_time, tracking_number)
+    values (#{orderId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, #{createTime,jdbcType=DATE}, 
+      #{username,jdbcType=VARCHAR}, #{returnAmount,jdbcType=DECIMAL}, #{returnName,jdbcType=VARCHAR}, 
+      #{returnPhone,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{handleTime,jdbcType=TIMESTAMP}, 
+      #{handleNote,jdbcType=VARCHAR}, #{returnNote,jdbcType=VARCHAR}, #{reasonId,jdbcType=BIGINT}, 
+      #{receiveName,jdbcType=VARCHAR}, #{receivePhone,jdbcType=VARCHAR}, #{receiveAddress,jdbcType=VARCHAR}, 
+      #{receiveTime,jdbcType=TIMESTAMP}, #{trackingNumber,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xiepingfu.eshop.mbg.model.OrderReturnInformation">
+    update order_return_information
+    set order_id = #{orderId,jdbcType=BIGINT},
+      sku_id = #{skuId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=DATE},
+      username = #{username,jdbcType=VARCHAR},
+      return_amount = #{returnAmount,jdbcType=DECIMAL},
+      return_name = #{returnName,jdbcType=VARCHAR},
+      return_phone = #{returnPhone,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      handle_time = #{handleTime,jdbcType=TIMESTAMP},
+      handle_note = #{handleNote,jdbcType=VARCHAR},
+      return_note = #{returnNote,jdbcType=VARCHAR},
+      reason_id = #{reasonId,jdbcType=BIGINT},
+      receive_name = #{receiveName,jdbcType=VARCHAR},
+      receive_phone = #{receivePhone,jdbcType=VARCHAR},
+      receive_address = #{receiveAddress,jdbcType=VARCHAR},
+      receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      tracking_number = #{trackingNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, order_id, sku_id, create_time, username, return_amount, return_name, return_phone, 
+    status, handle_time, handle_note, return_note, reason_id, receive_name, receive_phone, 
+    receive_address, receive_time, tracking_number
+    from order_return_information
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, order_id, sku_id, create_time, username, return_amount, return_name, return_phone, 
+    status, handle_time, handle_note, return_note, reason_id, receive_name, receive_phone, 
+    receive_address, receive_time, tracking_number
+    from order_return_information
+  </select>
+</mapper>
